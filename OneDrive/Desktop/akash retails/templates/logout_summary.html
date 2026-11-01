@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Collection Summary</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+            background: #eef2f7;
+        }
+
+        .summary {
+            width: 500px;
+            max-width: 90%;
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 0;
+        }
+
+        .logout-message {
+            text-align: center;
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 7px;
+            background: #f8f9fa;
+            font-size: 18px;
+        }
+
+        .grand-total {
+            background: #222;
+            color: white;
+            font-size: 21px;
+            font-weight: bold;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        a,
+        button {
+            flex: 1;
+            padding: 13px;
+            border: none;
+            border-radius: 6px;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .login-button {
+            background: #007bff;
+            color: white;
+        }
+
+        .print-button {
+            background: #28a745;
+            color: white;
+        }
+
+        @media print {
+            .buttons {
+                display: none;
+            }
+
+            body {
+                background: white;
+            }
+
+            .summary {
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="summary">
+
+        <h1>Logout Collection Summary</h1>
+
+        <p class="logout-message">
+            {{ username }} logged out successfully.
+        </p>
+
+        <div class="row">
+            <span>Bills Completed</span>
+            <strong>{{ bills_completed }}</strong>
+        </div>
+
+        <div class="row">
+            <span>Total Cash Collected</span>
+
+            <strong>
+                ₹{{ "%.2f"|format(cash_collected) }}
+            </strong>
+        </div>
+
+        <div class="row">
+            <span>Total UPI Collected</span>
+
+            <strong>
+                ₹{{ "%.2f"|format(upi_collected) }}
+            </strong>
+        </div>
+
+        <div class="row grand-total">
+            <span>Grand Total</span>
+
+            <strong>
+                ₹{{ "%.2f"|format(grand_total) }}
+            </strong>
+        </div>
+
+        <div class="buttons">
+
+            <button
+                type="button"
+                class="print-button"
+                onclick="window.print()"
+            >
+                Print Summary
+            </button>
+
+            <a
+                href="{{ url_for('login') }}"
+                class="login-button"
+            >
+                Login Again
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
